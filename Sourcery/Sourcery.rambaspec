@@ -1,0 +1,24 @@
+# Template information section
+name: Sourcery
+summary: Setup Sourcery structure and install templates, [Sourcery](https://github.com/krzysztofzablocki/Sourcery)
+author: Eelco Koelewijn
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+- {name: Generated/AutoMockable.generated.swift, path: Code/Generated/AutoMockable.generated.swift}
+- {name: Generated/AutoLenses.generated.swift, path: Code/Generated/AutoLenses.generated.swift}
+- {name: Generated/AutoEquatable.generated.swift, path: Code/Generated/AutoEquatable.generated.swift}
+- {name: Protocols/AutoMockable.swift, path: Code/Protocols/AutoMockable.swift}
+- {name: Protocols/AutoLenses.swift, path: Code/Protocols/AutoLenses.swift}
+- {name: Protocols/AutoEquatable.swift, path: Code/Protocols/AutoEquatable.swift}
+- {name: Templates/AutoEquatable.stencil, path: Code/Templates/AutoEquatable.stencil}
+- {name: Templates/AutoMockable.stencil, path: Code/Templates/AutoMockable.stencil}
+- {name: Templates/AutoLenses.stencil, path: Code/Templates/AutoLenses.stencil}
+
+# The declarations for test files
+test_files:
+
+# Template dependencies
+dependencies:

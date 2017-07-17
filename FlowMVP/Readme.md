@@ -1,0 +1,37 @@
+## Usages
+To name the module classes add custom parameter to `generamba gen` command.
+
+```
+generamba gen MODULE-PATH FlowMVP --custom-parameters=name:MODULENAME
+```
+
+`MODULE-PATH` can contain slashes to make sub-folders, like `Modules/Gallery`
+
+## Dependencies
+A FlowMVP module needs the FlowController protocol and extensions to be available in the project. To install the FlowController protocol + extensions execute the following generamba command.  
+
+```
+generamba gen Common FlowController
+```
+
+## Rambafile spec
+```
+### Headers settings
+company: COMPANY-NAME
+
+### Xcode project settings
+project_name: PROJECT-NAME
+xcodeproj_path: XCODE-PROJ-FILE
+
+### Code generation settings section
+# The main project target name
+project_target: PROJECT-TARGET-NAME
+project_file_path: ""
+project_group_path: ""
+
+### Templates
+templates:
+#- {name: FlowMVP, local: 'local-path'}
+#- {name: FlowController, local: 'local-path'}
+#- {name: remote_template_name, git: 'https://github.com/igrekde/remote_template'}
+```

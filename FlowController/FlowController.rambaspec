@@ -1,0 +1,17 @@
+# Template information section
+name: FlowController
+summary: Creates base classes and interfaces for FlowController
+author: Eelco Koelewijn
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+- {name: FlowController/FlowController.swift, path: Code/FlowController/FlowController.swift.liquid}
+- {name: FlowController/MainFlowController.swift, path: Code/FlowController/MainFlowController.swift.liquid}
+
+# The declarations for test files
+test_files:
+
+# Template dependencies
+dependencies:

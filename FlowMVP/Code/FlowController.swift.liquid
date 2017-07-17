@@ -1,0 +1,43 @@
+import Foundation
+import UIKit
+protocol {{ custom_parameters.name }}FlowController {
+    func start()
+}
+
+protocol {{ custom_parameters.name }}PresenterDelegate: class {
+
+}
+
+protocol {{ custom_parameters.name }}FlowControllerDelegate: class {
+
+}
+
+final class {{ custom_parameters.name }}FlowControllerImplementation: MainFlowController,
+                                                            {{ custom_parameters.name }}FlowController {
+    var mainFlowController: UIViewController {
+        return navigationController
+    }
+    var childFlowController: [FlowController] = []
+
+    private lazy var navigationController: UINavigationController = {
+        let nc = UINavigationController()
+        nc.navigationBar.isTranslucent = false
+        return nc
+    }()
+
+    init(window: UIWindow?) {
+        window?.rootViewController = mainFlowController
+        window?.makeKeyAndVisible()
+    }
+
+    func start() {
+        let presenter = Mixin{{ custom_parameters.name }}Presenter()
+        navigationController.viewControllers = [{{ custom_parameters.name }}ViewController(presenter: presenter)]
+    }
+}
+
+extension {{ custom_parameters.name }}FlowControllerImplementation: {{ custom_parameters.name }}PresenterDelegate {
+}
+
+extension {{ custom_parameters.name }}FlowControllerImplementation: {{ custom_parameters.name }}FlowControllerDelegate {
+}

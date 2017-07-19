@@ -16,7 +16,7 @@ protocol Uses{{ custom_parameters.name }}Presenter {
 
 class Mixin{{ custom_parameters.name }}Presenter: {{ custom_parameters.name }}Presenter {
     weak var view: {{ custom_parameters.name }}View?
-    weak var delegate: {{ custom_parameters.name | downcase }}PresenterDelegate
+    weak var delegate: {{ custom_parameters.name }}PresenterDelegate?
 
     func start() {
 

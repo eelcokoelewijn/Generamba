@@ -3,6 +3,8 @@ final class {{ custom_parameters.name }}ModuleView: UIView {
     private lazy var label: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
+        l.numberOfLines = 0
+        l.lineBreakMode = .byWordWrapping
         return l
     }()
 

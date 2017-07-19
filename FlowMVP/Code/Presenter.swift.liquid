@@ -1,28 +1,28 @@
 import Foundation
 
-protocol {{ custom_parameters.name }}View: class {
+protocol {{ module_info.name }}View: class {
 
 }
 
-protocol {{ custom_parameters.name }}Presenter {
+protocol {{ module_info.name }}Presenter {
     func start()
-    func setView(_ view: {{ custom_parameters.name }}View)
+    func setView(_ view: {{ module_info.name }}View)
     func dismiss()
 }
 
-protocol Uses{{ custom_parameters.name }}Presenter {
-    var {{ custom_parameters.name | downcase }}Presenter: {{ custom_parameters.name }}Presenter { get }
+protocol Uses{{ module_info.name }}Presenter {
+    var {{ module_info.name | downcase }}Presenter: {{ module_info.name }}Presenter { get }
 }
 
-class Mixin{{ custom_parameters.name }}Presenter: {{ custom_parameters.name }}Presenter {
-    weak var view: {{ custom_parameters.name }}View?
-    weak var delegate: {{ custom_parameters.name }}PresenterDelegate?
+class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
+    weak var view: {{ module_info.name }}View?
+    weak var delegate: {{ module_info.name }}PresenterDelegate?
 
     func start() {
 
     }
 
-    func setView(_ view: {{ custom_parameters.name }}View) {
+    func setView(_ view: {{ module_info.name }}View) {
         self.view = view
     }
 

@@ -1,12 +1,12 @@
 import UIKit
-final class {{ custom_parameters.name }}ViewController: UIViewController, {{ custom_parameters.name }}View, Uses{{ custom_parameters.name }}Presenter {
-    let {{ custom_parameters.name | downcase }}Presenter: {{ custom_parameters.name }}Presenter
-    private lazy var moduleView: {{ custom_parameters.name }}ModuleView = {{ custom_parameters.name }}ModuleView()
+final class {{ module_info.name }}ViewController: UIViewController, {{ module_info.name }}View, Uses{{ module_info.name }}Presenter {
+    let {{ module_info.name | downcase }}Presenter: {{ module_info.name }}Presenter
+    private lazy var moduleView: {{ module_info.name }}ModuleView = {{ module_info.name }}ModuleView()
 
-    init(presenter: {{ custom_parameters.name }}Presenter) {
-        {{ custom_parameters.name | downcase }}Presenter = presenter
+    init(presenter: {{ module_info.name }}Presenter) {
+        {{ module_info.name | downcase }}Presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        {{ custom_parameters.name | downcase }}Presenter.setView(self)
+        {{ module_info.name | downcase }}Presenter.setView(self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -20,6 +20,6 @@ final class {{ custom_parameters.name }}ViewController: UIViewController, {{ cus
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        {{ custom_parameters.name | downcase }}Presenter.start()
+        {{ module_info.name | downcase }}Presenter.start()
     }
 }

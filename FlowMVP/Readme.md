@@ -2,10 +2,10 @@
 To name the module classes add custom parameter to `generamba gen` command.
 
 ```
-generamba gen MODULE-PATH FlowMVP --custom-parameters=name:MODULENAME
+generamba gen MODULE-NAME FlowMVP --module_path MODULE-PATH
 ```
 
-`MODULE-PATH` can contain slashes to make sub-folders, like `Modules/Gallery`
+`MODULE-PATH` can contain slashes to make sub-folders, like `App/Modules/Gallery`
 
 ## Dependencies
 A FlowMVP module needs the FlowController protocol and extensions to be available in the project. To install the FlowController protocol + extensions execute the following generamba command.  
@@ -28,6 +28,10 @@ xcodeproj_path: XCODE-PROJ-FILE
 project_target: PROJECT-TARGET-NAME
 project_file_path: ""
 project_group_path: ""
+
+### Catalogs
+catalogs:
+- 'https://github.com/template/repo'
 
 ### Templates
 templates:

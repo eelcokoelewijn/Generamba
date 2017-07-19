@@ -7,6 +7,7 @@ protocol {{ custom_parameters.name }}View: class {
 protocol {{ custom_parameters.name }}Presenter {
     func start()
     func setView(_ view: {{ custom_parameters.name }}View)
+    func dismiss()
 }
 
 protocol Uses{{ custom_parameters.name }}Presenter {
@@ -15,11 +16,17 @@ protocol Uses{{ custom_parameters.name }}Presenter {
 
 class Mixin{{ custom_parameters.name }}Presenter: {{ custom_parameters.name }}Presenter {
     weak var view: {{ custom_parameters.name }}View?
+    weak var delegate: {{ custom_parameters.name | downcase }}PresenterDelegate
+
     func start() {
 
     }
 
     func setView(_ view: {{ custom_parameters.name }}View) {
         self.view = view
+    }
+
+    func dismiss() {
+      delegate?.dismiss(presenter: self)
     }
 }

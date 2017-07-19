@@ -5,7 +5,7 @@ protocol {{ custom_parameters.name }}FlowController {
 }
 
 protocol {{ custom_parameters.name }}PresenterDelegate: class {
-
+  func dismiss(presenter: {{ custom_parameters.name }}Presenter)
 }
 
 protocol {{ custom_parameters.name }}FlowControllerDelegate: class {
@@ -32,11 +32,15 @@ final class {{ custom_parameters.name }}FlowControllerImplementation: MainFlowCo
 
     func start() {
         let presenter = Mixin{{ custom_parameters.name }}Presenter()
+        presenter.delegate = self
         navigationController.viewControllers = [{{ custom_parameters.name }}ViewController(presenter: presenter)]
     }
 }
 
 extension {{ custom_parameters.name }}FlowControllerImplementation: {{ custom_parameters.name }}PresenterDelegate {
+  func dismiss(presenter: {{ custom_parameters.name }}Presenter) {
+      delegate?.dismiss(flowController: self)
+  }
 }
 
 extension {{ custom_parameters.name }}FlowControllerImplementation: {{ custom_parameters.name }}FlowControllerDelegate {

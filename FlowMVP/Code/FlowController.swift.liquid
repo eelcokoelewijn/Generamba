@@ -25,6 +25,8 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
         return nc
     }()
 
+    init() {}
+    
     init(window: UIWindow?) {
         window?.rootViewController = mainFlowController
         window?.makeKeyAndVisible()

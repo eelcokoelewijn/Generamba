@@ -1,47 +1,52 @@
 import Foundation
 import UIKit
+
 protocol {{ module_info.name }}FlowController {
     func start()
 }
-
+{% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 protocol {{ module_info.name }}FlowControllerDelegate: class {
-
+    func dismiss(flowController: FlowController)
 }
-
+{% endif %}
 final class {{ module_info.name }}FlowControllerImplementation: MainFlowController,
                                                             {{ module_info.name }}FlowController {
     var mainFlowController: UIViewController {
         return navigationController
     }
     var childFlowController: [FlowController] = []
-
+    {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
+    weak var delegate: {{ module_info.name }}FlowControllerDelegate?
+    {% endif %}
     private lazy var navigationController: UINavigationController = {
         let nc = UINavigationController()
         nc.navigationBar.isTranslucent = false
         return nc
     }()
-
-    init() {}
-
-    {% if custom_parameters.rootVC == "yes" %}
+    {% if custom_parameters.windowRootVC == "yes" %}
     init(window: UIWindow?) {
         window?.rootViewController = mainFlowController
         window?.makeKeyAndVisible()
     }
     {% endif %}
-
     func start() {
         let presenter = Mixin{{ module_info.name }}Presenter()
         presenter.delegate = self
         navigationController.viewControllers = [{{ module_info.name }}ViewController(presenter: presenter)]
     }
+
+    init() {}
 }
 
 extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.name }}PresenterDelegate {
-  func dismiss(presenter: {{ module_info.name }}Presenter) {
-      // delegate?.dismiss(flowController: self)
-  }
+    func dismiss(presenter: {{ module_info.name }}Presenter) {
+        {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
+        delegate?.dismiss(flowController: self)
+        {% endif %}
+    }
 }
 
-extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {
+{% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
+extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {
 }
+{% endif %}

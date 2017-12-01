@@ -9,7 +9,6 @@ Custom parameters `--custom_parameters`:
 - `windowRootVC:[yes|no]`: adds init with `UIWindow` as argument, to setup flow-controller as `window.rootViewController`.
 - `hasDelegate:[yes|no]`: adds flow controller delegate protocol for flow-controller, needs `delegate`.
 - `delegate:[flow-controller]`: the flow-controller implementing the delegate protocol, needs `hasDelegate`.
-- `hasChilds:[yes|no]`: adds `childFlowController` array, if flow-controller manages child flow-controllers.
 
 `MODULE-PATH` can contain slashes to make sub-folders, like `App/Modules/Gallery`
 

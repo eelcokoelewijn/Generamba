@@ -14,7 +14,7 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
     var mainFlowController: UIViewController {
         return navigationController
     }
-    {% if custom_parameters.hasChilds == "yes" %}var childFlowController: [FlowController] = []{% endif %}
+    var childFlowController: [FlowController] = []
     {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
     weak var delegate: {{ module_info.name }}FlowControllerDelegate?
     {% endif %}

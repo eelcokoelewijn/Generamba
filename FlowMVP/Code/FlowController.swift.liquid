@@ -4,10 +4,6 @@ protocol {{ module_info.name }}FlowController {
     func start()
 }
 
-protocol {{ module_info.name }}PresenterDelegate: class {
-  func dismiss(presenter: {{ module_info.name }}Presenter)
-}
-
 protocol {{ module_info.name }}FlowControllerDelegate: class {
 
 }
@@ -26,7 +22,7 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
     }()
 
     init() {}
-    
+
     init(window: UIWindow?) {
         window?.rootViewController = mainFlowController
         window?.makeKeyAndVisible()

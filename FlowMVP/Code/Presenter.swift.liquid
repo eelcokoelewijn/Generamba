@@ -1,12 +1,16 @@
 import Foundation
 
-protocol {{ module_info.name }}View: class {
+protocol {{ module_info.name }}PresenterDelegate: class {
+    func dismiss(presenter: {{ module_info.name }}Presenter)
+}
+
+protocol {{ module_info.name }}Output: class {
 
 }
 
 protocol {{ module_info.name }}Presenter {
     func start()
-    func setView(_ view: {{ module_info.name }}View)
+    func setOutput(_ output: {{ module_info.name }}Output)
     func dismiss()
 }
 
@@ -15,15 +19,15 @@ protocol Uses{{ module_info.name }}Presenter {
 }
 
 class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
-    weak var view: {{ module_info.name }}View?
+    weak var output: {{ module_info.name }}Output?
     weak var delegate: {{ module_info.name }}PresenterDelegate?
 
     func start() {
 
     }
 
-    func setView(_ view: {{ module_info.name }}View) {
-        self.view = view
+    func setOutput(_ output: {{ module_info.name }}Output) {
+        self.output = output
     }
 
     func dismiss() {

@@ -1,12 +1,12 @@
 import UIKit
-final class {{ module_info.name }}ViewController: UIViewController, {{ module_info.name }}View, Uses{{ module_info.name }}Presenter {
+final class {{ module_info.name }}ViewController: UIViewController, {{ module_info.name }}Output, Uses{{ module_info.name }}Presenter {
     let {{ module_info.name | downcase }}Presenter: {{ module_info.name }}Presenter
     private lazy var moduleView: {{ module_info.name }}ModuleView = {{ module_info.name }}ModuleView()
 
     init(presenter: {{ module_info.name }}Presenter) {
         {{ module_info.name | downcase }}Presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        {{ module_info.name | downcase }}Presenter.setView(self)
+        {{ module_info.name | downcase }}Presenter.setOutput(self)
     }
 
     required init?(coder aDecoder: NSCoder) {

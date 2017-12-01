@@ -31,11 +31,14 @@ project_group_path: ""
 
 ### Catalogs
 catalogs:
-- 'https://github.com/template/repo'
+- 'https://github.com/eelcokoelewijn/Generamba'
 
 ### Templates
 templates:
-#- {name: FlowMVP, local: 'local-path'}
-#- {name: FlowController, local: 'local-path'}
+- {name: FlowMVP}
+- {name: FlowController}
+- {name: Service}
+- {name: Sourcery}
+#- {name: local_template_name, local: 'absolute/file/path'}
 #- {name: remote_template_name, git: 'https://github.com/igrekde/remote_template'}
 ```

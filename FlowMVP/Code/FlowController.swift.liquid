@@ -6,7 +6,7 @@ protocol {{ module_info.name }}FlowController {
 }
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 protocol {{ module_info.name }}FlowControllerDelegate: class {
-    func dismiss(flowController: FlowController)
+    func dismiss(flowController: {{ module_info.name }}FlowController)
 }
 {% endif %}
 final class {{ module_info.name }}FlowControllerImplementation: MainFlowController,
@@ -14,7 +14,7 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
     var mainFlowController: UIViewController {
         return navigationController
     }
-    var childFlowController: [FlowController] = []
+    {% if custom_parameters.hasChilds == "yes" %}var childFlowController: [FlowController] = []{% endif %}
     {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
     weak var delegate: {{ module_info.name }}FlowControllerDelegate?
     {% endif %}
@@ -40,13 +40,14 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
 
 extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.name }}PresenterDelegate {
     func dismiss(presenter: {{ module_info.name }}Presenter) {
-        {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
-        delegate?.dismiss(flowController: self)
-        {% endif %}
+        {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}delegate?.dismiss(flowController: self) {% endif %}
     }
 }
 
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {
+    func dismiss(flowController: {{ module_info.name }}FlowController) {
+
+    }
 }
 {% endif %}

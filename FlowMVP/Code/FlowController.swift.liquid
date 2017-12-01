@@ -23,10 +23,12 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
 
     init() {}
 
+    {% if custom_parameters.rootVC == "yes" %}
     init(window: UIWindow?) {
         window?.rootViewController = mainFlowController
         window?.makeKeyAndVisible()
     }
+    {% endif %}
 
     func start() {
         let presenter = Mixin{{ module_info.name }}Presenter()

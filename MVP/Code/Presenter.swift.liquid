@@ -41,3 +41,12 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
     }
     {% endif %}
 }
+
+{% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
+// Move to {{ custom_parameters.delegate }}
+extension {{ custom_parameters.delegate }}: {{ module_info.name }}PresenterDelegate {
+    func dismiss(presenter: {{ module_info.name }}Presenter) {
+
+    }
+}
+{%end if%}

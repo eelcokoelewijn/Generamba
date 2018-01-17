@@ -1,5 +1,5 @@
 ## Usages
-To name the module classes add custom parameter to `generamba gen` command.
+To name the module classes add custom parameter to `generamba gen` command. Creates a MVP module without flow controller, this should be used for additional modules within a specific flow.
 
 ```
 generamba gen MODULE-NAME FlowMVP --module_path MODULE-PATH

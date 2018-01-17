@@ -4,10 +4,13 @@ protocol {{ module_info.name }}Service {
 
 }
 
+protocol Uses{{ module_info.name }}Service {
+    var {{ module_info.name | downcase }}Service: {{ module_info.name }}Service { get }
+}
+
 final class {{ module_info.name }}ServiceImplementation: {{ module_info.name }}Service {
 
 }
-
-// MARK: Make service mockable
-
-extension {{ module_info.name }}Service { }
+{% if custom_parameters.mockable == "yes" %}
+extension {{ module_info.name }}Service: AutoMockable {}
+{% endif %}

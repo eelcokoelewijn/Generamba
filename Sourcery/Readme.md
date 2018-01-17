@@ -2,8 +2,10 @@
 Install Sourcery template into folder/group Sourcery.
 
 ```
-generamba gen Sourcery Sourcery
+generamba gen Sourcery Sourcery --module_path PATH
 ```
+
+`PATH` should be the target folder, like `App`.
 
 ## Build phase
 Setup the Xcode build phase on the target to execute Sourcery and generate code based on the templates.

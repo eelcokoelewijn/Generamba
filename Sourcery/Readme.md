@@ -5,7 +5,11 @@ Install Sourcery template into folder/group Sourcery.
 generamba gen Sourcery Sourcery --module_path PATH
 ```
 
-`PATH` should be the target folder, like `App`.
+`PATH` should be the target folder, like `App`. Not in the root of the project.
+
+## Templates
+Goto [Sourcery-Templates](https://github.com/krzysztofzablocki/Sourcery/tree/master/Templates/Templates) and get all the templates for your project.  
+Equatable, Mockable and Lenses are really useful.
 
 ## Build phase
 Setup the Xcode build phase on the target to execute Sourcery and generate code based on the templates.

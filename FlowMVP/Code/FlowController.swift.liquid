@@ -6,7 +6,7 @@ protocol {{ module_info.name }}FlowController {
 }
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 protocol {{ module_info.name }}FlowControllerDelegate: class {
-    func dismiss(flowController: {{ module_info.name }}FlowController)
+    func dismiss(flowController: {{ module_info.name }}FlowControllerImplementation)
 }
 {% endif %}
 final class {{ module_info.name }}FlowControllerImplementation: MainFlowController,
@@ -46,7 +46,7 @@ extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.nam
 
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {
-    func dismiss(flowController: {{ module_info.name }}FlowController) {
+    func dismiss(flowController: {{ module_info.name }}FlowControllerImplementation) {
 
     }
 }

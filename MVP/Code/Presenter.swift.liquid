@@ -48,5 +48,11 @@ extension {{ custom_parameters.delegate }}: {{ module_info.name }}PresenterDeleg
     func dismiss(presenter: {{ module_info.name }}Presenter) {
 
     }
+
+    func create{{ module_info.name }}Presenter() -> Mixin{{ module_info.name }}Presenter {
+        let {{ module_info.name | downcase }}Presenter: Mixin{{ module_info.name }}Presenter = Mixin{{ module_info.name }}Presenter()
+        {{ module_info.name | downcase }}Presenter.delegate = self
+        return {{ module_info.name | downcase }}Presenter
+    }
 }
 {% endif %}

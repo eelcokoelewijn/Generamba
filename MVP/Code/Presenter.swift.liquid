@@ -5,7 +5,7 @@ protocol {{ module_info.name }}PresenterDelegate: class {
 }
 
 protocol {{ module_info.name }}Output: class {
-
+    func setLabel(text: String)
 }
 
 protocol {{ module_info.name }}Presenter {
@@ -23,7 +23,7 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
     weak var delegate: {{ module_info.name }}PresenterDelegate?
 
     func start() {
-
+        output.setLabel(text: "{{ module_info.name }} view")
     }
 
     func setOutput(_ output: {{ module_info.name }}Output) {

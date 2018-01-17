@@ -1,5 +1,5 @@
 import UIKit
-final class {{ module_info.name }}ViewController: UIViewController, {{ module_info.name }}Output, Uses{{ module_info.name }}Presenter {
+final class {{ module_info.name }}ViewController: UIViewController, Uses{{ module_info.name }}Presenter {
     let {{ module_info.name | downcase }}Presenter: {{ module_info.name }}Presenter
     private lazy var moduleView: {{ module_info.name }}ModuleView = {{ module_info.name }}ModuleView()
 
@@ -21,5 +21,11 @@ final class {{ module_info.name }}ViewController: UIViewController, {{ module_in
     override func viewDidLoad() {
         super.viewDidLoad()
         {{ module_info.name | downcase }}Presenter.start()
+    }
+}
+
+extension {{ module_info.name }}ViewController: {{ module_info.name }}Output {
+    func setLabel(text: String) {
+        moduleView.configure(labelWithText: text)
     }
 }

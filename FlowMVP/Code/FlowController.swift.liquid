@@ -45,7 +45,7 @@ extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.nam
 }
 
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
-// Move to {{ custom_parameters.delegate }}FlowControllerImplementation
+// Move to {{ custom_parameters.delegate }}FlowControllerImplementation file
 extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {
     func dismiss(flowController: {{ module_info.name }}FlowControllerImplementation) {
 
@@ -53,12 +53,12 @@ extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ modul
 }
 
 private extension {{ custom_parameters.delegate }}FlowControllerImplementation {
-    func create{{ module_info.name }}FC() -> {{ module_info.name }}FlowControllerImplementation {
-        let {{ module_info.name | downcase }}FC: {{ module_info.name }}FlowControllerImplementation = {{ module_info.name }}FlowControllerImplementation()
-        {{ module_info.name | downcase }}FC.delegate = self
-        add(childFlowController: {{ module_info.name | downcase }}FC)
-        {{ module_info.name | downcase }}FC.start()
-        return {{ module_info.name | downcase }}FC
+    func create{{ module_info.name }}FlowController() -> {{ module_info.name }}FlowControllerImplementation {
+        let flowController: {{ module_info.name }}FlowControllerImplementation = {{ module_info.name }}FlowControllerImplementation()
+        flowController.delegate = self
+        add(childFlowController: flowController)
+        flowController.start()
+        return flowController
     }
 }
 {% endif %}

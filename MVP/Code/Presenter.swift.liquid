@@ -43,12 +43,14 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
 }
 
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
-// Move to {{ custom_parameters.delegate }}
+// Move to {{ custom_parameters.delegate }} file
 extension {{ custom_parameters.delegate }}: {{ module_info.name }}PresenterDelegate {
     func dismiss(presenter: {{ module_info.name }}Presenter) {
 
     }
+}
 
+private extenstion {{ custom_parameters.delegate }} {
     func create{{ module_info.name }}ViewController() -> {{ module_info.name }}ViewController {
         let presenter: Mixin{{ module_info.name }}Presenter = Mixin{{ module_info.name }}Presenter()
         presenter.delegate = self

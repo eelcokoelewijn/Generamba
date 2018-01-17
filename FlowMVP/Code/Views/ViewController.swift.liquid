@@ -20,7 +20,20 @@ final class {{ module_info.name }}ViewController: UIViewController, Uses{{ modul
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
         {{ module_info.name | downcase }}Presenter.start()
+    }
+
+    private func configureNavBar() {
+        let closeButton: UIBarButtonItem = UIBarButtonItem(title: "close",
+                                                           style: UIBarButtonItemStyle.done,
+                                                           target: self,
+                                                           action: #selector(closeButtonAction(sender:)))
+        navigationItem.leftBarButtonItem = closeButton
+    }
+
+    @objc private func closeButtonAction(sender: UIBarButtonItem) {
+        {{ module_info.name | downcase }}Presenter.dismiss()
     }
 }
 

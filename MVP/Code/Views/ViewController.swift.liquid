@@ -28,4 +28,8 @@ extension {{ module_info.name }}ViewController: {{ module_info.name }}Output {
     func setLabel(text: String) {
         moduleView.configure(labelWithText: text)
     }
+
+    func configure(title: String) {
+        self.title = title
+    }
 }

@@ -6,12 +6,13 @@ protocol {{ module_info.name }}PresenterDelegate: class {
 
 protocol {{ module_info.name }}Output: class {
     func setLabel(text: String)
+    func configure(title: String)
 }
 
 protocol {{ module_info.name }}Presenter {
     func start()
     func setOutput(_ output: {{ module_info.name }}Output)
-    func dismiss()
+    func closeTapped()
 }
 
 protocol Uses{{ module_info.name }}Presenter {
@@ -23,6 +24,7 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
     weak var delegate: {{ module_info.name }}PresenterDelegate?
 
     func start() {
+        output?.configure(title: "{{ module_info.name }}")
         output?.setLabel(text: "{{ module_info.name }} view")
     }
 
@@ -30,7 +32,7 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
         self.output = output
     }
 
-    func dismiss() {
+    func closeTapped() {
       delegate?.dismiss(presenter: self)
     }
 }

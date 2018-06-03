@@ -7,6 +7,7 @@ protocol {{ module_info.name }}PresenterDelegate: class {
 {% endif %}
 
 protocol {{ module_info.name }}Output: class {
+    func configure(title: String)
     func setLabel(text: String)
 }
 
@@ -28,6 +29,7 @@ class Mixin{{ module_info.name }}Presenter: {{ module_info.name }}Presenter {
     weak var delegate: {{ module_info.name }}PresenterDelegate?
     {% endif %}
     func start() {
+        output?.configure(title: "{{ module_info.name }}")
         output?.setLabel(text: "{{ module_info.name }} view")
     }
 
@@ -50,7 +52,7 @@ extension {{ custom_parameters.delegate }}: {{ module_info.name }}PresenterDeleg
     }
 }
 
-private extenstion {{ custom_parameters.delegate }} {
+private extension {{ custom_parameters.delegate }} {
     func create{{ module_info.name }}ViewController() -> {{ module_info.name }}ViewController {
         let presenter: Mixin{{ module_info.name }}Presenter = Mixin{{ module_info.name }}Presenter()
         presenter.delegate = self

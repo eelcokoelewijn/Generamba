@@ -1,12 +1,12 @@
 import UIKit
 final class {{ module_info.name }}ViewController: UIViewController, Uses{{ module_info.name }}Presenter {
-    let {{ module_info.name | downcase }}Presenter: {{ module_info.name }}Presenter
+    let presenter: {{ module_info.name }}Presenter
     private lazy var moduleView: {{ module_info.name }}ModuleView = {{ module_info.name }}ModuleView()
 
     init(presenter: {{ module_info.name }}Presenter) {
-        {{ module_info.name | downcase }}Presenter = presenter
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        {{ module_info.name | downcase }}Presenter.setOutput(self)
+        presenter.setOutput(self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -21,20 +21,27 @@ final class {{ module_info.name }}ViewController: UIViewController, Uses{{ modul
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        {{ module_info.name | downcase }}Presenter.start()
+        presenter.start()
     }
 
     private func configureNavBar() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ",
+                                                           style: UIBarButtonItemStyle.plain,
+                                                           target: nil,
+                                                           action: nil)
+        {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
         let closeButton: UIBarButtonItem = UIBarButtonItem(title: "close",
                                                            style: UIBarButtonItemStyle.done,
                                                            target: self,
                                                            action: #selector(closeButtonAction(sender:)))
         navigationItem.leftBarButtonItem = closeButton
+        {% endif %}
     }
-
+    {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
     @objc private func closeButtonAction(sender: UIBarButtonItem) {
-        {{ module_info.name | downcase }}Presenter.closeTapped()
+        presenter.closeTapped()
     }
+    {% endif %}
 }
 
 extension {{ module_info.name }}ViewController: {{ module_info.name }}Output {

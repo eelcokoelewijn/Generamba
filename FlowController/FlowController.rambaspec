@@ -7,8 +7,8 @@ license: MIT
 
 # The declarations for code files
 code_files:
-- {name: FlowController/FlowController.swift, path: Code/FlowController/FlowController.swift.liquid}
-- {name: FlowController/MainFlowController.swift, path: Code/FlowController/MainFlowController.swift.liquid}
+- {custom_name: FlowController.swift, name: FlowController/FlowController.swift, path: Code/FlowController/FlowController.swift.liquid}
+- {custom_name: MainFlowController.swift, name: FlowController/MainFlowController.swift, path: Code/FlowController/MainFlowController.swift.liquid}
 
 # The declarations for test files
 test_files:

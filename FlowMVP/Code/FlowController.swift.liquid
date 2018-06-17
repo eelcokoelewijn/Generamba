@@ -11,6 +11,7 @@ protocol {{ module_info.name }}FlowControllerDelegate: class {
 {% endif %}
 final class {{ module_info.name }}FlowControllerImplementation: MainFlowController,
                                                             {{ module_info.name }}FlowController {
+    {% if custom_parameters.windowRootVC == "yes" %}private weak var window: UIWindow?{% endif %}
     var mainFlowController: UIViewController {
         return navigationController
     }
@@ -25,25 +26,30 @@ final class {{ module_info.name }}FlowControllerImplementation: MainFlowControll
     }()
     {% if custom_parameters.windowRootVC == "yes" %}
     init(window: UIWindow?) {
+        self.window = window
         window?.rootViewController = mainFlowController
         window?.makeKeyAndVisible()
     }
     {% endif %}
     func start() {
         let presenter = Mixin{{ module_info.name }}Presenter()
+        {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
         presenter.delegate = self
-        navigationController.viewControllers = [{{ module_info.name }}ViewController(presenter: presenter)]
+        {% endif %}
+        let vc: {{ module_info.name }}ViewController = {{ module_info.name }}ViewController(presenter: presenter)
+        navigationController.viewControllers = [vc]
     }
 
     init() {}
 }
 
+{% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 extension {{ module_info.name }}FlowControllerImplementation: {{ module_info.name }}PresenterDelegate {
     func dismiss(presenter: {{ module_info.name }}Presenter) {
         {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}delegate?.dismiss(flowController: self) {% endif %}
     }
 }
-
+{% endif %}
 {% if custom_parameters.hasDelegate == "yes" and custom_parameters.delegate != "" %}
 // Move to {{ custom_parameters.delegate }}FlowControllerImplementation file
 extension {{ custom_parameters.delegate }}FlowControllerImplementation: {{ module_info.name }}FlowControllerDelegate {

@@ -1,0 +1,15 @@
+import Swinject
+
+final class {{ module_info.name }}Assembly: Assembly {
+  func assemble(container: Container) {
+    container.register({{ module_info.name }}Presenter.self) { res, navStack in
+      return {{ module_info.name }}NavigationStack(resolver: res)
+    }
+    container.register({{ module_info.name }}ViewController.self) { res, navStack in
+      let presenter: {{ module_info.name }}Presenter = r.resolve({{ module_info.name }}Presenter.self, argument: navStack)!
+      return {{ module_info.name }}ViewController(presenter: {{ module_info.name }}Presenter)
+    }
+    container.register({{ module_info.name }}Presenter.self) { _, navStack in
+      return {{ module_info.name }}Presenter(navigationStack: navStack)
+    }
+}

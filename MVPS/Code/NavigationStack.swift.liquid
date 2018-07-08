@@ -1,0 +1,28 @@
+import UIKit
+import Swinject
+
+enum {{ module_info.name }}Path {
+    case initial
+}
+
+class {{ module_info.name }}NavigationStack: UINavigationController, Navigating {
+  private let resolver: Resolver
+
+  init(resolver: Resolver) {
+    self.resolver = resolver
+    navigate(Stack(path: {{ module_info.name }}Path.initial))
+  }
+
+  func navigate(_ stack: Stack<{{ module_info.name }}Path>) {
+    switch stack.path {
+    case .initial: setupInitialView()
+    }
+  }
+}
+
+private extension {{ module_info.name }}NavigationStack {
+  func setupInitialView() {
+    let vc = resolver.resolve({{ module_info.name }}ViewController.self, argument: self)!
+    viewController = [vc]
+  }
+}

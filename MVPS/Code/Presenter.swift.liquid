@@ -1,0 +1,29 @@
+import Foundation
+
+protocol {{ module_info.name }}Output: class {
+    func configure(title: String)
+    func setLabel(text: String)
+}
+
+protocol {{ module_info.name }}Presenter {
+    func start()
+    func setOutput(_ output: {{ module_info.name }}Output)
+}
+
+class {{ module_info.name }}PresenterImplementation: {{ module_info.name }}Presenter {
+    weak var output: {{ module_info.name }}Output?
+    weak var navigationStack: {{ module_info.name }}NavigationStack?
+
+    init(navigationStack: {{ module_info.name }}NavigationStack) {
+      self.navigationStack = navigationStack
+    }
+
+    func start() {
+        output?.configure(title: "{{ module_info.name }}")
+        output?.setLabel(text: "{{ module_info.name }} view")
+    }
+
+    func setOutput(_ output: {{ module_info.name }}Output) {
+        self.output = output
+    }
+}

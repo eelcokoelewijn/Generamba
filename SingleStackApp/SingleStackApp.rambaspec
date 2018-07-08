@@ -1,0 +1,19 @@
+# Template information section
+name: SingleStackApp
+summary: Create a single stack application using navigator.
+author: EKO
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+- {custom_name: Common/Protocols/Navigating.swift, name: Navigating.swift, path: Code/Navigating.swift.liquid}
+- {custom_name: Common/Navigator.swift, name: Navigator.swift, path: Code/Navigator.swift.liquid}
+- {custom_name: Common/Protocols/Stacks.swift, name: Stacks.swift, path: Code/Stacks.swift.liquid}
+
+# The declarations for test files
+test_files:
+
+# Template dependencies
+dependencies:
+- Swinject

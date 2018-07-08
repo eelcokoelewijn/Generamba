@@ -1,0 +1,25 @@
+import Swinject
+import UIKit
+
+// MARK: Main paths
+
+enum MainPath {
+    case initial
+}
+
+//MARK: Navigator implementing navigating
+class Navigator: Navigating {
+    private let assembler: Assembler
+    private weak var window: UIWindow?
+
+    init(_ window: UIWindow?) {
+        self.window = window
+        assembler = Assembler([{{ custom_parameters.stack }}Assembly()])
+    }
+
+    func navigate(_ stack: Stack<MainPath>) {
+        switch stack.path {
+        case .initial: window?.rootViewController = assembler.resolver.resolve({{ custom_parameters.stack }}NavigationStack.self)!
+        }
+    }
+}

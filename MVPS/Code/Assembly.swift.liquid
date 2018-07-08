@@ -5,11 +5,11 @@ final class {{ module_info.name }}Assembly: Assembly {
     container.register({{ module_info.name }}NavigationStack.self) { (res: Resolver) -> {{ module_info.name }}NavigationStack in
       return {{ module_info.name }}NavigationStack(resolver: res)
     }
-    container.register({{ module_info.name }}ViewController.self) { (res: Resolver, navStack:{{ module_info.name }}NavigationStack) -> {{ module_info.name }}ViewController in
+    container.register({{ module_info.name }}ViewController.self) { (res: Resolver, navStack: {{ module_info.name }}NavigationStack) -> {{ module_info.name }}ViewController in
       let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navStack)!
       return {{ module_info.name }}ViewController(presenter: presenter)
     }
-    container.register({{ module_info.name }}Presenter.self) { (_: Resolver, navStack:{{ module_info.name }}NavigationStack) -> {{ module_info.name }}Presenter in
+    container.register({{ module_info.name }}Presenter.self) { (_: Resolver, navStack: {{ module_info.name }}NavigationStack) -> {{ module_info.name }}Presenter in
       return {{ module_info.name }}PresenterImplementation(navigationStack: navStack)
     }
   }

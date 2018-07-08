@@ -7,12 +7,14 @@ license: MIT
 
 # The declarations for code files
 code_files:
-- {name: Service/Service.h, path: Code/Service/service.h.liquid}
-- {name: Service/Service.m, path: Code/Service/service.m.liquid}
+- {name: Views/View.swift, path: Code/Views/View.swift.liquid}
+- {name: Views/ViewController.swift, path: Code/Views/ViewController.swift.liquid}
+- {name: Presenter.swift, path: Code/Presenter.swift.liquid}
+- {name: Assembly.swift, path: Code/Assembly.swift.liquid}
+- {name: NavigationStack.swift, path: Code/NavigationStack.swift.liquid}
 
 # The declarations for test files
 test_files:
-- {name: Service/ServiceTests.m, path: Tests/Service/service_tests.m.liquid}
 
 # Template dependencies
 dependencies:

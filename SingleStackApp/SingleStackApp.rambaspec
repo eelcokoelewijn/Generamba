@@ -7,7 +7,6 @@ license: MIT
 
 # The declarations for code files
 code_files:
-- {custom_name: Protocols/Navigating.swift, name: Protocols/Navigating.swift, path: Code/Protocols/Navigating.swift.liquid}
 - {custom_name: Navigator.swift, name: Navigator.swift, path: Code/Navigator.swift.liquid}
 - {custom_name: Entities/Stack.swift, name: Entities/Stack.swift, path: Code/Entities/Stack.swift.liquid}
 

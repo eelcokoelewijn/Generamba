@@ -2,15 +2,26 @@ import Swinject
 
 final class {{ module_info.name }}Assembly: Assembly {
   func assemble(container: Container) {
-    container.register({{ module_info.name }}NavigationStack.self) { (res: Resolver) -> {{ module_info.name }}NavigationStack in
-      return {{ module_info.name }}NavigationStack(resolver: res)
+    container.register(UINavigationController.self, name: Stacks.{{ module_info.name | downcase }}.rawValue) { (res: Resolver) -> UINavigationController in
+      let navVC: UINavigationController = UINavigationController()
+      let navigator: {{ module_info.name }}Navigator = res.resolve({{ module_info.name }}Navigator.self, argument: navVC)!
+      let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navigator)!
+      let vc: {{ module_info.name }}ViewController = {{ module_info.name }}ViewController(presenter: presenter)
+      navVC.viewControllers = [vc]
+      return navVC
     }
-    container.register({{ module_info.name }}ViewController.self) { (res: Resolver, navStack: {{ module_info.name }}NavigationStack) -> {{ module_info.name }}ViewController in
-      let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navStack)!
+    container.register({{ module_info.name }}ViewController.self) { (res: Resolver) -> {{ module_info.name }}ViewController in
+      let navigator: {{ module_info.name }}Navigator = res.resolve({{ module_info.name }}Navigator.self)!
+      let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navigator)!
       return {{ module_info.name }}ViewController(presenter: presenter)
     }
-    container.register({{ module_info.name }}Presenter.self) { (_: Resolver, navStack: {{ module_info.name }}NavigationStack) -> {{ module_info.name }}Presenter in
-      return {{ module_info.name }}PresenterImplementation(navigationStack: navStack)
+    container.register({{ module_info.name }}Presenter.self) { (_: Resolver, navigator: {{ module_info.name }}Navigator) -> {{ module_info.name }}Presenter in
+      return {{ module_info.name }}PresenterImplementation(navigator: navigator)
+    }
+    container.register({{ module_info.name }}Navigator.self) { (res: Resolver, navVC: UINavigationController) -> {{ module_info.name }}Navigator in
+      let navigator = {{ module_info.name }}NavigationStack(resolver: res)
+      navigator.rootViewController = navVC
+      return navigator
     }
   }
 }

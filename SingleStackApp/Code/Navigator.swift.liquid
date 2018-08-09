@@ -1,6 +1,12 @@
 import Swinject
 import UIKit
 
+// MARK: Stack names
+
+enum Stacks: String {
+  case {{ custom_parameters.stack | downcase }}
+}
+
 // MARK: Main paths
 
 enum MainPath {
@@ -8,7 +14,7 @@ enum MainPath {
 }
 
 //MARK: Navigator implementing navigating
-class Navigator: Navigating {
+class Navigator {
     private let assembler: Assembler
     private weak var window: UIWindow?
 
@@ -19,7 +25,7 @@ class Navigator: Navigating {
 
     func navigate(_ stack: Stack<MainPath>) {
         switch stack.path {
-        case .initial: window?.rootViewController = assembler.resolver.resolve({{ custom_parameters.stack }}NavigationStack.self)!
+        case .initial: window?.rootViewController = assembler.resolver.resolve(UINavigationController.self, name: Stacks.{{ custom_parameters.stack | downcase }}.rawValue)!
         }
     }
 }

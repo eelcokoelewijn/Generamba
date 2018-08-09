@@ -1,33 +1,25 @@
-import UIKit
 import Swinject
+import UIKit
 
 enum {{ module_info.name }}Path {
     case initial
 }
 
-class {{ module_info.name }}NavigationStack: UINavigationController, Navigating {
+protocol {{ module_info.name }}Navigator: class {
+  func navigate(_ stack: Stack<{{ module_info.name }}Path>)
+}
+
+class {{ module_info.name }}NavigationStack: {{ module_info.name }}Navigator {
   private let resolver: Resolver
+  weak var rootViewController: UINavigationController?
 
   init(resolver: Resolver) {
     self.resolver = resolver
-    super.init(nibName: nil, bundle: nil)
-    navigate(Stack(path: {{ module_info.name }}Path.initial))
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 
   func navigate(_ stack: Stack<{{ module_info.name }}Path>) {
     switch stack.path {
-    case .initial: setupInitialView()
+    case .initial: return
     }
-  }
-}
-
-private extension {{ module_info.name }}NavigationStack {
-  func setupInitialView() {
-    let vc = resolver.resolve({{ module_info.name }}ViewController.self, argument: self)!
-    viewControllers = [vc]
   }
 }

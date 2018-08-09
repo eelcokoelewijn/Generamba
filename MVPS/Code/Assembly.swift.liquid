@@ -4,14 +4,12 @@ final class {{ module_info.name }}Assembly: Assembly {
   func assemble(container: Container) {
     container.register(UINavigationController.self, name: Stacks.{{ module_info.name | downcase }}.rawValue) { (res: Resolver) -> UINavigationController in
       let navVC: UINavigationController = UINavigationController()
-      let navigator: {{ module_info.name }}Navigator = res.resolve({{ module_info.name }}Navigator.self, argument: navVC)!
-      let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navigator)!
-      let vc: {{ module_info.name }}ViewController = {{ module_info.name }}ViewController(presenter: presenter)
+      let vc: {{ module_info.name }}ViewController = res.resolve({{ module_info.name }}ViewController.self, argument: navVC)!
       navVC.viewControllers = [vc]
       return navVC
     }
-    container.register({{ module_info.name }}ViewController.self) { (res: Resolver) -> {{ module_info.name }}ViewController in
-      let navigator: {{ module_info.name }}Navigator = res.resolve({{ module_info.name }}Navigator.self)!
+    container.register({{ module_info.name }}ViewController.self) { (res: Resolver, navVC: UINavigationController) -> {{ module_info.name }}ViewController in
+      let navigator: {{ module_info.name }}Navigator = res.resolve({{ module_info.name }}Navigator.self, argument: navVC)!
       let presenter: {{ module_info.name }}Presenter = res.resolve({{ module_info.name }}Presenter.self, argument: navigator)!
       return {{ module_info.name }}ViewController(presenter: presenter)
     }

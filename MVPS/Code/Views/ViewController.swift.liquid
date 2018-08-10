@@ -1,7 +1,7 @@
 import UIKit
 final class {{ module_info.name }}ViewController: UIViewController {
     let presenter: {{ module_info.name }}Presenter
-    private lazy var moduleView: {{ module_info.name }}View = {{ module_info.name }}View()
+    private lazy var stackView: {{ module_info.name }}View = {{ module_info.name }}View()
 
     init(presenter: {{ module_info.name }}Presenter) {
         self.presenter = presenter
@@ -15,7 +15,7 @@ final class {{ module_info.name }}ViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        view = moduleView
+        view = stackView
     }
 
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ final class {{ module_info.name }}ViewController: UIViewController {
 
 extension {{ module_info.name }}ViewController: {{ module_info.name }}Output {
     func setLabel(text: String) {
-        moduleView.configure(labelWithText: text)
+        stackView.configure(labelWithText: text)
     }
 
     func configure(title: String) {

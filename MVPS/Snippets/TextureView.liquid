@@ -1,0 +1,37 @@
+import UIKit
+import AsyncDisplayKit
+
+final class {{ module_info.name }}Node: ASDisplayNode {
+    lazy var textNode: ASTextNode = {
+        let t = ASTextNode()
+        return t
+    }()
+
+    private lazy var scrollNode: ASScrollNode = {
+        let n = ASScrollNode()
+        n.automaticallyManagesContentSize = true
+        n.automaticallyManagesSubnodes = true
+        n.backgroundColor = .white
+        return n
+    }()
+
+    override init() {
+        super.init()
+        automaticallyManagesSubnodes = true
+    }
+
+    func setTextNodeText(_ text: NSAttributedString) {
+        textNode.attributedText = text
+    }
+
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        let vStack = ASStackLayoutSpec(direction: .vertical,
+                                       spacing: 8,
+                                       justifyContent: .start,
+                                       alignItems: .start,
+                                       children: [textNode])
+        let insetSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8), child: vStack)
+        scrollNode.layoutSpecBlock = { _, _ in insetSpec }
+        return ASAbsoluteLayoutSpec(children: [scrollNode])
+    }
+}

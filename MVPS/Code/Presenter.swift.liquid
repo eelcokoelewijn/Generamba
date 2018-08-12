@@ -12,7 +12,7 @@ protocol {{ module_info.name }}Presenter {
 
 class {{ module_info.name }}PresenterImplementation: {{ module_info.name }}Presenter {
     weak var output: {{ module_info.name }}Output?
-    weak var navigator: {{ module_info.name }}Navigator?
+    private let navigator: {{ module_info.name }}Navigator
 
     init(navigator: {{ module_info.name }}Navigator) {
       self.navigator = navigator

@@ -19,3 +19,4 @@ test_files:
 # Template dependencies
 dependencies:
 - Swinject
+- Texture

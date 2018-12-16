@@ -1,0 +1,61 @@
+{% include 'Header' %}
+
+import UIKit
+import IGListKit
+
+@objc class {{ module_info.name }}Controller: NSObject {
+    private var loading = false
+    private lazy var dataSource: {{ module_info.name }}DataSource = {
+        let dataSource = {{ module_info.name }}DataSource()
+        dataSource.delegate = self
+        return dataSource
+    }()
+    private lazy var adapter: ListAdapter = {
+        let updater = ListAdapterUpdater()
+        let adapter = ListAdapter(updater: updater,
+                           viewController: self.viewController,
+                         workingRangeSize: 1)
+        adapter.collectionView = self.viewController?.{{ module_info.name | downcase }}View.collectionView
+        adapter.dataSource = dataSource
+        return adapter
+    }()
+    weak var viewController: {{ module_info.name }}ViewController?
+
+    func setViewController(_ viewController: {{ module_info.name }}ViewController) {
+        self.viewController = viewController
+    }
+
+    func start() {
+        load()
+    }
+
+    private func load() {
+        startLoading()
+        DispatchQueue.global(qos: .default).async {
+            // fake background loading task
+            sleep(2)
+            DispatchQueue.main.async {
+                self.stopLoading()
+                let objects: [ListDiffable] = [{% for i in (1..5) %}{{ custom_parameters.model }}(){% if i < 5 %}, {% endif %}{% endfor %}]
+                self.dataSource.configureObjects(objects)
+                self.adapter.performUpdates(animated: true, completion: nil)
+            }
+        }
+    }
+
+    private func startLoading() {
+        loading = true
+        // show spinner
+    }
+
+    private func stopLoading() {
+        loading = false
+        // stop/hide spinner
+    }
+}
+
+// MARK: {{ module_info.name }}SectionController delegate
+
+extension {{ module_info.name }}Controller: {{ module_info.name }}SectionControllerDelegate {
+
+}

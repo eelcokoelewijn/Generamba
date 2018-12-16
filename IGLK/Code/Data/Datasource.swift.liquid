@@ -1,0 +1,38 @@
+{% include 'Header' %}
+
+import Foundation
+import IGListKit
+
+final class {{ module_info.name }}DataSource: NSObject, ListAdapterDataSource {
+    {% if custom_parameters.sectionHeader == 'yes' -%}private let sectionHeader: ListDiffable = "SectionHeader" as ListDiffable{% endif %}
+    private var objects: [ListDiffable] = []
+    weak var delegate: {{ module_info.name }}SectionControllerDelegate?
+
+    func configureObjects(_ objects: [ListDiffable]) {
+        {% if custom_parameters.sectionHeader == 'yes' -%}let sectionHeaders = [sectionHeader]{% endif %}
+        self.objects = sectionHeaders + objects
+    }
+
+    func appendObjects(_ objects: [ListDiffable]) {
+        self.objects.append(contentsOf: objects)
+    }
+
+    // MARK: ListAdapterDatasource
+
+    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+        return objects
+    }
+
+    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        if let object = object as? String, object == "SectionHeader" {
+            return {{ module_info.name }}HeaderSectionController()
+        }
+        let sectionController = {{ module_info.name }}SectionController()
+        sectionController.delegate = delegate
+        return sectionController
+    }
+
+    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+        return nil
+    }
+}

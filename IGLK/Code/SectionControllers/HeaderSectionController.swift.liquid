@@ -1,0 +1,52 @@
+{% include 'Header' %}
+
+import UIKit
+import IGListKit
+
+class {{ module_info.name }}HeaderSectionController: ListSectionController {
+    private var data: String?
+    private let headerTitle: String = "{{ module_info.name | upcase }} HEADER TITLE"
+    private let headerText: String = "Header text, this is the header {{ module_info.name | downcase }} body"
+
+    override init() {
+      super.init()
+      inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    override func didUpdate(to object: Any) {
+      guard let data = object as? String else {
+        return
+      }
+      self.data = data
+    }
+
+    override func numberOfItems() -> Int {
+      return 1
+    }
+
+    override func cellForItem(at index: Int) -> UICollectionViewCell {
+      guard let context = collectionContext else {
+          return UICollectionViewCell()
+      }
+      let dequeuedCell = context.dequeueReusableCell(of: {{ module_info.name }}HeaderCell.self, for: self, at: index)
+      guard let cell = dequeuedCell as? {{ module_info.name }}HeaderCell else {
+        return dequeuedCell
+      }
+      cell.configureWithTitle(headerTitle, text: headerText)
+      return cell
+    }
+
+    override func sizeForItem(at index: Int) -> CGSize {
+        guard let width = collectionContext?.insetContainerSize.width else {
+            return .zero
+        }
+        let horizontalPadding = {{ module_info.name }}HeaderCell.horizontalPadding * 2
+        let verticalPadding = {{ module_info.name }}HeaderCell.verticalPadding * 2
+        let titleHeight: CGFloat = headerTitle.height(withConstrainedWidth: width - horizontalPadding, font: {{ module_info.name }}HeaderCell.titleFont)
+        let textHeight: CGFloat = headerText.height(withConstrainedWidth: width - horizontalPadding, font: {{ module_info.name }}HeaderCell.textFont)
+        return CGSize(width: width, height: titleHeight + textHeight + verticalPadding + 8)
+    }
+}
+{% if custom_parameters.includeStringSizeExtension == 'yes' %}
+{%- include 'string-size-extension' -%}
+{% endif %}

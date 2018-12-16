@@ -1,0 +1,26 @@
+{% include 'Header' %}
+
+import Foundation
+import IGListKit
+
+final class {{ custom_parameters.model }} {
+    private var identifier: String = UUID().uuidString
+
+    #warning("Implement correct sizing for {{ custom_parameters.model }}")
+    func size(forWidth containerWidth: CGFloat) -> CGSize {
+        return CGSize(width: containerWidth, height: 100)
+    }
+}
+
+extension {{ custom_parameters.model }}: ListDiffable {
+    func diffIdentifier() -> NSObjectProtocol {
+        return identifier as NSString
+    }
+  
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {     
+        guard let object = object as? {{ custom_parameters.model }} else {
+            return false
+        }
+        return self.identifier == object.identifier
+    }
+}

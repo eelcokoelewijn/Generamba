@@ -1,0 +1,59 @@
+{% include 'Header' %}
+
+import UIKit
+import IGListKit
+
+protocol {{ module_info.name }}SectionControllerDelegate: class { }
+
+class {{ module_info.name }}SectionController: ListSectionController {
+    private var data: {{ custom_parameters.model }}?
+    weak var delegate: {{ module_info.name }}SectionControllerDelegate?
+    /// Cell delegate
+    private weak var cellDelegate: {{ module_info.name }}CellDelegate?
+
+    override init() {
+        super.init()
+        inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        #warning("implement delegate on {{ module_info.name }}SectionController")
+        // cellDelegate = self
+    }
+
+    override func didUpdate(to object: Any) {
+        guard let data = object as? {{ custom_parameters.model }} else {
+          return
+        }
+        self.data = data
+    }
+
+    override func numberOfItems() -> Int {
+        return 1
+    }
+
+    override func cellForItem(at index: Int) -> UICollectionViewCell {
+        guard let context = collectionContext, let data = self.data else {
+            return UICollectionViewCell()
+        }
+        return create{{ module_info.name }}Cell(model: data, context: context, index: index)
+    }
+
+    override func sizeForItem(at index: Int) -> CGSize {
+        guard let width = collectionContext?.insetContainerSize.width, let model = self.data else {
+          return .zero
+        }
+        return getSizeFor{{ custom_parameters.model }}(model, width: width)
+    }
+
+    func create{{ module_info.name }}Cell(model: {{ custom_parameters.model }}, context: ListCollectionContext, index: Int) -> UICollectionViewCell {
+        let dequeuedCell = context.dequeueReusableCell(of: {{ module_info.name }}Cell.self, for: self, at: index)
+        guard let cell = dequeuedCell as? {{ module_info.name }}Cell else {
+            return dequeuedCell
+        }
+        cell.configureWith{{ custom_parameters.model }}(model)
+        cell.delegate = cellDelegate
+        return cell
+    }
+
+    private func getSizeFor{{ custom_parameters.model }}(_ model: {{ custom_parameters.model }}, width: CGFloat) -> CGSize {
+        return model.size(forWidth: width)
+    }
+}

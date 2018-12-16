@@ -1,0 +1,25 @@
+# Template information section
+name: IGLK
+summary: IGListKit files including separate section controller, datasource, cell and view controller.
+author: EKO
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+- {name: ViewController.swift, path: Code/ViewController.swift.liquid}
+- {name: Controller.swift, path: Code/Controller.swift.liquid}
+- {name: Views/View.swift, path: Code/Views/View.swift.liquid}
+- {name: Views/Cell.swift, path: Code/Views/Cell.swift.liquid}
+- {name: Views/HeaderCell.swift, path: Code/Views/HeaderCell.swift.liquid}
+- {name: SectionControllers/SectionController.swift, path: Code/SectionControllers/SectionController.swift.liquid}
+- {name: SectionControllers/HeaderSectionController.swift, path: Code/SectionControllers/HeaderSectionController.swift.liquid}
+- {name: Data/Data.swift, path: Code/Data/Data.swift.liquid}
+- {name: Data/Datasource.swift, path: Code/Data/Datasource.swift.liquid}
+
+# The declarations for test files
+test_files:
+
+# Template dependencies
+dependencies:
+- IGListKit

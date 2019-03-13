@@ -1,0 +1,19 @@
+# Template information section
+name: ViewController
+summary: ViewController + controller
+author: EKO
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+- {name: Views/View.swift, path: Code/Views/View.swift.liquid}
+- {name: ViewController.swift, path: Code/ViewController.swift.liquid}
+- {name: Controller.swift, path: Code/Controller.swift.liquid}
+
+# The declarations for test files
+test_files:
+
+# Template dependencies
+dependencies:
+- 

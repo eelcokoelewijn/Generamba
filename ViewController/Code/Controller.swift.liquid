@@ -1,0 +1,22 @@
+{% include 'Header' %}
+
+import Foundation
+
+protocol {{ module_info.name }}Controllable: class {
+
+}
+
+class {{ module_info.name }}Controller {
+    weak var viewController: {{ module_info.name }}Controllable?
+    let shouldHideBottomBar: Bool = true
+    init() {
+    }
+
+    func start() {
+        
+    }
+
+    func setViewController(_ viewController: {{ module_info.name }}Controllable) {
+        self.viewController = viewController
+    }
+}
